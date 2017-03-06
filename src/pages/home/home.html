@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="myForm" (ngSubmit)="sendData()">
+    <ion-item>
+      <ion-label floating>Nombre</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+    <p *ngIf="name.hasError('required') && name.touched" color="danger" padding-left>El nombre es requerido</p>
+    <ion-item>
+      <ion-label floating>Email</ion-label>
+      <ion-input formControlName="email" type="email"></ion-input>
+    </ion-item>
+    <p *ngIf="email.hasError('required') && email.touched" color="danger" padding-left>El email es requerido</p>
+    <p *ngIf="email.hasError('pattern') && email.touched" color="danger" padding-left>El formato del correo no es correcto</p>
+    <ion-item>
+      <ion-label>Fecha de Nacimiento</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" formControlName="birthday"></ion-datetime>
+    </ion-item>
+    <p *ngIf="birthday.hasError('required') && email.touched" color="danger" padding-left>Selecciona una fecha de nacimiento</p>    
+    <!--se le asigna al formGroupName el nombre del formgroup (contenedor de los controles: tics, meca y otro )-->
+    <ion-list formGroupName="interests">
+
+      <ion-item>
+        <ion-label>TICS</ion-label>
+        <!--Cada interes tiene su control-->
+        <ion-checkbox formControlName="tics"></ion-checkbox>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Mecánica</ion-label>
+        <ion-checkbox formControlName="meca"></ion-checkbox>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Otros</ion-label>
+        <ion-checkbox formControlName="otro"></ion-checkbox>
+      </ion-item>
+
+    </ion-list>
+    <!--Texto para mostrar errores. ngIf comprueba la variable !myForm(formgrooup principal).controls.interests(formgroup anidado).valid-->
+        <p *ngIf="!myForm.controls.interests.valid" color="danger" padding-left>Selecciona al menos un interés</p>    
+
+    <ion-list radio-group formControlName="gender">
+      <ion-item>
+        <ion-label>Masculiino</ion-label>
+        <ion-radio value="masculino"></ion-radio>
+      </ion-item>
+      <ion-item>
+        <ion-label>Femenino</ion-label>
+        <ion-radio value="femenino"></ion-radio>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+  <ion-label>Estado Civil</ion-label>
+  <ion-select formControlName="civil">
+    <ion-option value="Soltero" selected="true">Soltero</ion-option>
+    <ion-option value="Casado">Casado</ion-option>
+    <ion-option value="Union libre">Union Libre</ion-option>
+    <ion-option value="Divorciado">Divorciado</ion-option>
+  </ion-select>
+</ion-item>
+
+    <ion-fab bottom right>
+      <button ion-fab type="submit" [disabled]="!myForm.valid">
+          <ion-icon name="arrow-forward"></ion-icon>
+      </button>
+    </ion-fab>
+  </form>
+
+</ion-content>
