@@ -16,10 +16,31 @@
 <ion-content padding>
   <ion-card *ngIf="navParams.data">
         <ion-card-header>
-            navParams.data
+            Identificación
         </ion-card-header>
         <ion-card-content>
-            {{navParams.data | json}}
+          <p>Nombre: {{navParams.data.name}}</p>
+          <p>Correo: {{navParams.data.email}}</p>
         </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        Personal
+      </ion-card-header>
+      <ion-card-content>
+        <p> Nacimiento: {{navParams.data.birthday}}</p>
+        <p> E. Civil: {{navParams.data.civil}}</p>
+        <p> Genero: {{navParams.data.gender}}</p>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-header>
+        Intereses
+      </ion-card-header>
+      <ion-card-content>
+        <ion-badge default item-left *ngIf="navParams.data.interests.tics">TICS</ion-badge>
+        <ion-badge default item-left *ngIf="navParams.data.interests.meca">Mecánica</ion-badge>
+        <ion-badge default item-left *ngIf="navParams.data.interests.otro">Otros</ion-badge>
+      </ion-card-content>
     </ion-card>
 </ion-content>
